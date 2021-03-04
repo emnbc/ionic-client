@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { HTTP } from '@ionic-native/http/ngx';
 
 
 @NgModule({
@@ -9,7 +10,9 @@ import { IonicModule } from '@ionic/angular';
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule
-  ]
+  ],
+  providers: [HTTP]
 })
 export class SharedModule { }

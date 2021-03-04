@@ -1,5 +1,25 @@
 <ion-content [fullscreen]="true">
-  <div id="container">
+  <div id="container" class="sign-in">
+    <ion-card *ngIf="error" color="danger">
+      <ion-card-content>
+        {{error}}
+      </ion-card-content>
+    </ion-card>
+    <ion-list class="sign-in__list">
+      <ion-item> 
+        <!-- <ion-label>Username</ion-label> -->
+        <ion-input type="text" [(ngModel)]="authData.username" placeholder="Username" name="username"></ion-input>
+      </ion-item>
+      <ion-item> 
+        <!-- <ion-label>Password</ion-label> -->
+        <ion-input type="text" [(ngModel)]="authData.password" placeholder="Password" name="password"></ion-input>
+      </ion-item>
+      <ion-button class="sign-in__login-button" expand="block" (click)="login()" [disabled]="loading">
+        <span *ngIf="!loading">Login</span>
+        <span *ngIf="loading">Processing...</span>
+      </ion-button>
+    </ion-list>
+    <br>
     <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
     <ion-button [routerLink]="['/main']">Sign-In</ion-button>
   </div>
