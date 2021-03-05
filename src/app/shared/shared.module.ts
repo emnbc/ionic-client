@@ -13,6 +13,6 @@ import { HTTP } from '@ionic-native/http/ngx';
     ReactiveFormsModule,
     IonicModule
   ],
-  providers: [HTTP]
+  providers: [HTTP] // to do, go to https://ionicframework.com/docs/native/community for more information
 })
 export class SharedModule { }

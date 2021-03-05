@@ -28,3 +28,9 @@
 .page-content {
     margin: 16px;
 }
+
+:root {
+    ion-item {
+        --highlight-color-valid: var(--ion-color-primary);
+    }
+}

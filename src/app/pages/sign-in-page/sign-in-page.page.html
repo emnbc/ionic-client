@@ -8,11 +8,11 @@
     <ion-list class="sign-in__list">
       <ion-item> 
         <!-- <ion-label>Username</ion-label> -->
-        <ion-input type="text" [(ngModel)]="authData.username" placeholder="Username" name="username"></ion-input>
+        <ion-input type="text" [(ngModel)]="authData.username" placeholder="Username" name="username" autocomplete="off"></ion-input>
       </ion-item>
       <ion-item> 
         <!-- <ion-label>Password</ion-label> -->
-        <ion-input type="text" [(ngModel)]="authData.password" placeholder="Password" name="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="authData.password" placeholder="Password" name="password" autocomplete="off"></ion-input>
       </ion-item>
       <ion-button class="sign-in__login-button" expand="block" (click)="login()" [disabled]="loading">
         <span *ngIf="!loading">Login</span>
