@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { HTTP } from '@ionic-native/http/ngx';
 
 
 @NgModule({
@@ -13,6 +12,6 @@ import { HTTP } from '@ionic-native/http/ngx';
     ReactiveFormsModule,
     IonicModule
   ],
-  providers: [HTTP] // to do, go to https://ionicframework.com/docs/native/community for more information
+  providers: [] // to do, go to https://ionicframework.com/docs/native/community for more information
 })
 export class SharedModule { }

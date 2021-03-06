@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, from } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
-// import { User } from '../models/user.model';
-// import { HttpHelperService } from './http-helper.service';
+import { User } from '../models/user.model';
+import { HttpHelperService } from './http-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ import { Storage } from '@ionic/storage';
 export class AuthService {
 
   private _token: string = null;
-//   user = new BehaviorSubject<User>(new User());
+  public user = new BehaviorSubject<User>(new User());
 
   constructor(
     private storage: Storage,
-    //   private http: HttpHelperService
+    private http: HttpHelperService
   ) {}
   
   setToken(value: string) {
@@ -47,10 +47,10 @@ export class AuthService {
   //   if (this.user.getValue().id) {
   //     return of(true);
   //   }
-  //   if (this.token) {
-  //     return this.http.find<User>('auth/me').pipe(map(res => {
-  //       if (res?.body?.id) {
-  //         this.user.next(new User(res.body));
+  //   if (this.getToken()) {
+  //     return this.http.get<User>('auth/me').pipe(map(res => {
+  //       if (res.id) {
+  //         this.user.next(new User(res));
   //         return true;
   //       } else {
   //         return false;
