@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, from } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 import { User } from '../models/user.model';
-import { HttpHelperService } from './http-helper.service';
+import { HttpHelperService, TOKEN_KEY } from './http-helper.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,11 @@ export class AuthService {
   }
 
   async getToken(): Promise<string> {
+    const tokenFromStorage = await this.getTokenFromStorage();
     if (this._token) {
       return of(this._token).toPromise();
-    } else if (this.getTokenFromStorage()) {
-      this.setToken(await this.getTokenFromStorage());
+    } else if (tokenFromStorage) {
+      this.setToken(tokenFromStorage);
       return this._token;
     } else {
       return of(null).toPromise();
@@ -34,34 +35,36 @@ export class AuthService {
   }
 
   async setTokenToStorage(token: string): Promise<void> {
-    await this.storage.set('token', token);
+    await this.storage.set(TOKEN_KEY, token);
   }
 
   async getTokenFromStorage(): Promise<string> {
-    if (this.storage.get('token')) {
-      return await this.storage.get('token')
-    } else return null;
+    const token = await this.storage.get(TOKEN_KEY);
+    return token ? token : null;
   }
 
-  // checkAuthorization(): Observable<boolean>  {
-  //   if (this.user.getValue().id) {
-  //     return of(true);
-  //   }
-  //   if (this.getToken()) {
-  //     return this.http.get<User>('auth/me').pipe(map(res => {
-  //       if (res.id) {
-  //         this.user.next(new User(res));
-  //         return true;
-  //       } else {
-  //         return false;
-  //       }
-  //     }), catchError(() => {
-  //       return of(false);
-  //     }));
-  //   } else {
-  //     return of(false);
-  //   }
-  // }
+  checkAuthorization(): Observable<boolean>  {
+    if (this.user.getValue().id) {
+      return of(true);
+    }
+
+    return from(this.getToken().then(async token => {
+      if (token) {
+        const user = await this.http.getPromise('auth/me');
+        if (user.id) {
+          this.user.next(new User(user));
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }).catch(() => {
+      return false;
+    }));
+
+  }
 
   refreshUser() {
     // this.http.find<User>('auth/me').subscribe(user => {
@@ -69,10 +72,10 @@ export class AuthService {
     // });
   }
 
-  logOut(): void {
+  async logOut(): Promise<void> {
     this._token = null;
-    this.storage.remove('token');
-    // this.user.next(new User());
+    await this.storage.remove(TOKEN_KEY);
+    this.user.next(new User());
   }
 
 }

@@ -31,7 +31,7 @@ export class IsAuthGuard implements CanActivate, CanActivateChild, CanLoad {
       if (isAuth) {
         return true;
       } else {
-        return this.router.parseUrl('/welcome');
+        return this.router.parseUrl('/sign-in');
       }
     }));
   }

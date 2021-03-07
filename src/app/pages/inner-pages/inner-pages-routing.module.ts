@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { IsAuthGuard } from '../../guards/is-auth.guard';
 
 import { InnerPagesPage } from './inner-pages.page';
 
@@ -25,7 +26,8 @@ const routes: Routes = [
         path: 'about',
         loadChildren: () => import('./about-page/about-page.module').then(m => m.AboutPagePageModule)
       }
-    ]
+    ],
+    canActivateChild: [IsAuthGuard]
   }
 ];
 

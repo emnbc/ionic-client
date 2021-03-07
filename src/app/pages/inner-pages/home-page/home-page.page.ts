@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { TOKEN_KEY } from '../../../services/http-helper.service';
 
 @Component({
   selector: 'home-page',
@@ -13,7 +14,7 @@ export class HomePagePage implements OnInit {
   constructor(private storage: Storage) { }
 
   async ngOnInit() {
-    this.token = await this.storage.get('token');
+    this.token = await this.storage.get(TOKEN_KEY);
   }
 
 }

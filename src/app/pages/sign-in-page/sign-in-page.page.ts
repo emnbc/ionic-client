@@ -17,6 +17,7 @@ export class SignInPage {
 
   loading: boolean = false;
   error: string = null;
+  authState: boolean = null;
 
   constructor(
     private router: Router,
@@ -27,6 +28,8 @@ export class SignInPage {
   ionViewWillLeave() {
     this.authData = { username: null, password: null };
     this.error = null;
+    this.authState = null;
+    this.loading = false;
   }
 
   async login() {
@@ -37,7 +40,7 @@ export class SignInPage {
         await this.auth.setTokenToStorage(res.accessToken);
         this.router.navigate(['/main']);
       }
-      this.loading = false;
+      // this.loading = false;
     }, error => {
       this.error = error.error;
       this.loading = false;

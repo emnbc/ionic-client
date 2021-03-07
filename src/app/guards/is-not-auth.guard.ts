@@ -29,7 +29,7 @@ export class IsNotAuthGuard implements CanActivate, CanActivateChild, CanLoad {
   checkLogin() {
     return this.auth.checkAuthorization().pipe(map(isAuth => {
       if (isAuth) {
-        return this.router.parseUrl('/home');
+        return this.router.parseUrl('/main');
       } else {
         return true;
       }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpHelperService } from '../../../services/http-helper.service';
 
 @Component({
   selector: 'about-page',
@@ -7,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutPagePage implements OnInit {
 
-  constructor() { }
+  data: any;
+  authState: boolean = null;
 
-  ngOnInit() {
-    
+  constructor(private http: HttpHelperService) { }
+
+  async ngOnInit() {
+    this.data = await this.http.getPromise('auth/me');
   }
 
 }

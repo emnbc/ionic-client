@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IsAuthGuard } from './guards/is-auth.guard';
+import { IsNotAuthGuard } from './guards/is-not-auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sign-in',
+    redirectTo: 'main',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'folder/:id',
-  //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  // },
   {
     path: 'sign-in',
     loadChildren: () => import('./pages/sign-in-page/sign-in-page.module').then( m => m.SignInPageModule),
+    canLoad: [IsNotAuthGuard]
     
   },
   {
     path: 'main',
-    loadChildren: () => import('./pages/inner-pages/inner-pages.module').then( m => m.InnerPagesPageModule)
+    loadChildren: () => import('./pages/inner-pages/inner-pages.module').then( m => m.InnerPagesPageModule),
+    canLoad: [IsAuthGuard]
   }
 ];
 
