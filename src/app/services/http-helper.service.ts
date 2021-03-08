@@ -5,7 +5,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { Storage } from '@ionic/storage';
 
 export const TOKEN_KEY = 'ic_access_token';
-export const API_URL = 'http://nest-angular.emnbc.com/api';
+export const API_URL = 'http://nest-angular.emnbc.com';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +19,19 @@ export class HttpHelperService {
 
   get<T>(url: string): Observable<T> {
     return from(this.authHeader().then(authHeader => {
-      return this.http.get(`${API_URL}/${url}`, {}, authHeader)
+      return this.http.get(`${API_URL}/api/${url}`, {}, authHeader)
     })).pipe(map(res => JSON.parse(res.data)));
   }
 
   post<T>(url: string, body: any): Observable<T> {
     return from(this.authHeader().then(authHeader => {
-      return this.http.post(`${API_URL}/${url}`, body, authHeader)
+      return this.http.post(`${API_URL}/api/${url}`, body, authHeader)
     })).pipe(map(res => JSON.parse(res.data)));
   }
 
   async getPromise(url: string) {
     const authHeader = await this.authHeader();
-    return this.http.get(`${API_URL}/${url}`, {}, authHeader).then(res => {
+    return this.http.get(`${API_URL}/api/${url}`, {}, authHeader).then(res => {
       return JSON.parse(res.data);
     }).catch(err => {
       return err;

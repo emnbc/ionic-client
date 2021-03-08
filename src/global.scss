@@ -33,6 +33,14 @@
     ion-item {
         --highlight-color-valid: var(--ion-color-primary);
     }
+
+    /** primary **/
+    --ion-color-primary: #546e7a;
+    --ion-color-primary-rgb: 84, 110, 122;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #3c5663;
+    --ion-color-primary-tint: #697b83;
 }
 
 .ios {

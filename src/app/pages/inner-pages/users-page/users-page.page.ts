@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpHelperService } from '../../../services/http-helper.service';
-import { Storage } from '@ionic/storage';
+import { Component } from '@angular/core';
+import { HttpHelperService, API_URL } from '../../../services/http-helper.service';
+import { User } from '../../../models/user.model';
 
 
 @Component({
@@ -8,25 +8,21 @@ import { Storage } from '@ionic/storage';
   templateUrl: './users-page.page.html',
   styleUrls: ['./users-page.page.scss'],
 })
-export class UsersPagePage implements OnInit {
+export class UsersPagePage {
 
-  data: any = null;
-  error: any = null;
+  users: User[] = [];
+  apiUploads = API_URL + '/uploads/';
 
-  constructor(private http: HttpHelperService, private storage: Storage) { }
+  constructor(private http: HttpHelperService) { }
 
-  async ngOnInit() {
-    // const token = await this.storage.get('token');
-    this.http.get<any>('auth/me').subscribe(res => {
-      this.data = res;
-    }, error => {
-      this.error = error;
+  ionViewDidEnter() {
+    this.http.get<User[]>('users').subscribe(users => {
+      this.users = users;
     });
-    // try {
-    //   this.data = await this.http.get<any>('auth/me').toPromise();
-    // } catch (err) {
-    //   this.error = err;
-    // }
+  }
+
+  ionViewDidLeave() {
+    this.users = [];
   }
 
 }

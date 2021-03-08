@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'inner-pages',
   templateUrl: './inner-pages.page.html',
   styleUrls: ['./inner-pages.page.scss'],
 })
-export class InnerPagesPage implements OnInit {
+export class InnerPagesPage {
 
   constructor() { }
-
-  ngOnInit() {
-    
-  }
 
 }

@@ -1,0 +1,30 @@
+ion-menu-button {
+    color: var(--ion-color-primary);
+}
+
+ion-list-header {
+    height: 100px;
+}
+  
+ion-note {
+    display: inline-block;
+    font-size: 16px;
+    color: var(--ion-color-medium-shade);
+}
+  
+ion-item.selected {
+    --background: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+  
+ion-item.selected ion-icon {
+    color: var(--ion-color-primary);
+}
+  
+ion-item.selected ion-icon {
+    color: var(--ion-color-primary);
+}
+
+ion-item.selected {
+    --color: var(--ion-color-primary);
+}
+  

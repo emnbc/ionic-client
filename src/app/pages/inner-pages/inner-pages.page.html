@@ -1,42 +1,7 @@
 <ion-menu #menu contentId="inner-content" type="overlay">
   <ion-content>
 
-    <ion-list-header color="primary">
-      <h1>Ionic Client</h1>
-    </ion-list-header>
-
-    <ion-list id="main-list">
-
-      <ion-menu-toggle auto-hide="false">
-        <ion-item routerDirection="root" [routerLink]="['/main/home']" [routerLinkActiveOptions]="{exact: true}" lines="none" detail="false" routerLinkActive="selected">
-          <ion-icon slot="start" ios="mail-outline" md="mail-sharp"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-
-      <ion-menu-toggle auto-hide="false">
-        <ion-item routerDirection="root" [routerLink]="['/main/users']" [routerLinkActiveOptions]="{exact: true}" lines="none" detail="false" routerLinkActive="selected">
-          <ion-icon slot="start" ios="people-outline" md="people-sharp"></ion-icon>
-          <ion-label>Users</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-
-    </ion-list>
-
-    <ion-list id="info-list">
-
-      <ion-list-header>
-        <h5>Information</h5>
-      </ion-list-header>
-
-      <ion-menu-toggle auto-hide="false">
-        <ion-item routerDirection="root" [routerLink]="['/main/about']" [routerLinkActiveOptions]="{exact: true}" lines="none" detail="false" routerLinkActive="selected">
-          <ion-icon slot="start" ios="information-circle-outline" md="information-circle-sharp"></ion-icon>
-          <ion-label>About</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-
-    </ion-list>
+    <main-menu></main-menu>
 
   </ion-content>
 </ion-menu>

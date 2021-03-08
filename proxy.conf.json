@@ -1,0 +1,8 @@
+{
+  "http://nest-angular.emnbc.com/uploads": {
+    "target": "http://nest-angular.emnbc.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

@@ -4,6 +4,7 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
+    "dev": "ionic serve -- --proxy-config proxy.conf.json" ,
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

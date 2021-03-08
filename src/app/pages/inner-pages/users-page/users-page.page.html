@@ -1,14 +1,40 @@
 <ion-header [translucent]="true">
   <app-header></app-header>
 </ion-header>
-<ion-content>
-  <div class="page-content">
-    This in the Users content!
+<ion-content class="users-page">
+
+  <div class="ion-padding">
+    <h3>Users</h3>
   </div>
-  <div class="page-content">
-    Data: {{data | json}}
-  </div>
-  <div class="page-content">
-    Error: {{error | json}}
-  </div>
+
+  <!-- <ion-list>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/img/no-avatar.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>John Dragovich</h2>
+        <h3>Nov 26, 1982</h3>
+        <p>demo@demo.com</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list> -->
+
+  <ion-list>
+
+    <ion-item *ngFor="let user of users">
+      <ion-avatar slot="start">
+        <img [src]="user.avatar ? apiUploads + user.avatar : 'assets/img/no-avatar.png'">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{user.firstName}} {{user.lastName}}</h2>
+        <h3>{{user.birthDate | date}}</h3>
+        <p>{{user.email}}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
 </ion-content>
