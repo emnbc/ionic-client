@@ -1,11 +1,12 @@
 <ion-header [translucent]="true">
-  <app-header></app-header>
+  <app-header title="Users"></app-header>
 </ion-header>
 <ion-content class="users-page">
 
-  <div class="ion-padding">
-    <h3>Users</h3>
-  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="getUsers($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
 
   <!-- <ion-list>
 
@@ -15,9 +16,9 @@
       </ion-avatar>
       <ion-label>
         <h2>John Dragovich</h2>
-        <h3>Nov 26, 1982</h3>
         <p>demo@demo.com</p>
       </ion-label>
+      <ion-note slot="end">Nov 26, 1982</ion-note>
     </ion-item>
 
   </ion-list> -->
@@ -30,9 +31,9 @@
       </ion-avatar>
       <ion-label>
         <h2>{{user.firstName}} {{user.lastName}}</h2>
-        <h3>{{user.birthDate | date}}</h3>
         <p>{{user.email}}</p>
       </ion-label>
+      <ion-note slot="end">{{user.birthDate | date}}</ion-note>
     </ion-item>
 
   </ion-list>

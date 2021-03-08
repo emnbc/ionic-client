@@ -16,8 +16,15 @@ export class UsersPagePage {
   constructor(private http: HttpHelperService) { }
 
   ionViewDidEnter() {
+    this.getUsers();
+  }
+
+  getUsers(event?: any) {
     this.http.get<User[]>('users').subscribe(users => {
       this.users = users;
+      event?.target?.complete();
+    }, () => {
+      event?.target?.complete();
     });
   }
 
