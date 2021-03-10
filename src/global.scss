@@ -56,3 +56,13 @@ p {
     --ion-padding: 16px;
     --ion-margin: 16px;
 }
+
+.ion-margin-x {
+    margin-left: var(--ion-margin);
+    margin-right: var(--ion-margin);
+}
+
+.ion-padding-x {
+    padding-left: var(--ion-padding);
+    padding-right: var(--ion-padding);
+}
