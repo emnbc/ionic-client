@@ -62,7 +62,17 @@ p {
     margin-right: var(--ion-margin);
 }
 
+.ion-margin-y {
+    margin-top: var(--ion-margin);
+    margin-bottom: var(--ion-margin);
+}
+
 .ion-padding-x {
     padding-left: var(--ion-padding);
     padding-right: var(--ion-padding);
+}
+
+.ion-padding-y {
+    padding-top: var(--ion-padding);
+    padding-bottom: var(--ion-padding);
 }
