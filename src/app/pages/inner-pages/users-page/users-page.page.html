@@ -25,7 +25,7 @@
 
   <ion-list>
 
-    <ion-item *ngFor="let user of users">
+    <ion-item *ngFor="let user of users" routerDirection="forward" [routerLink]="['/main/users', user.id]">
       <ion-avatar slot="start">
         <img [src]="user.avatar ? apiUploads + user.avatar : 'assets/img/no-avatar.png'">
       </ion-avatar>
