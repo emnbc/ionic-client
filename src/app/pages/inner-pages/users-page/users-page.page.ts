@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpHelperService, API_URL } from '../../../services/http-helper.service';
 import { User } from '../../../models/user.model';
 
@@ -8,28 +8,28 @@ import { User } from '../../../models/user.model';
   templateUrl: './users-page.page.html',
   styleUrls: ['./users-page.page.scss'],
 })
-export class UsersPagePage {
+export class UsersPagePage implements OnInit {
 
   users: User[] = [];
   apiUploads = API_URL + '/uploads/';
+  firstLoading: boolean = false;
 
   constructor(private http: HttpHelperService) { }
 
-  ionViewDidEnter() {
+  ngOnInit() {
+    this.firstLoading = true;
     this.getUsers();
   }
 
   getUsers(event?: any) {
     this.http.get<User[]>('users').subscribe(users => {
       this.users = users;
+      this.firstLoading = false;
       event?.target?.complete();
     }, () => {
+      this.firstLoading = false;
       event?.target?.complete();
     });
-  }
-
-  ionViewDidLeave() {
-    this.users = [];
   }
 
 }

@@ -23,7 +23,7 @@
 
   </ion-list> -->
 
-  <ion-list>
+  <ion-list *ngIf="!firstLoading">
 
     <ion-item *ngFor="let user of users" routerDirection="forward" [routerLink]="['/main/users', user.id]">
       <ion-avatar slot="start">
@@ -34,6 +34,21 @@
         <p>{{user.email}}</p>
       </ion-label>
       <ion-note slot="end">{{user.birthDate | date}}</ion-note>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="firstLoading">
+
+    <ion-item *ngFor="let i of [].constructor(7)">
+      <ion-avatar slot="start">
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h2><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></h2>
+        <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+      </ion-label>
+      <ion-note slot="end"><ion-skeleton-text animated style="width: 40px"></ion-skeleton-text></ion-note>
     </ion-item>
 
   </ion-list>
