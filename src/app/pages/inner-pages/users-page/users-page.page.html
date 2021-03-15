@@ -4,7 +4,7 @@
 <ion-content class="users-page">
 
   <ion-refresher slot="fixed" (ionRefresh)="getUsers($event)">
-    <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content loa></ion-refresher-content>
   </ion-refresher>
 
 
@@ -52,5 +52,9 @@
     </ion-item>
 
   </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadUsers($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

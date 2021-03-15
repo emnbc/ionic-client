@@ -14,10 +14,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   user: User;
   subscription: Subscription;
 
-  constructor(
-    private router: Router,
-    private auth: AuthService
-  ) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
     this.subscription = this.auth.user.subscribe(user => this.user = user);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, Route, CanActivate, CanActivateChild, CanLoad, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map} from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class IsNotAuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(
     private router: Router,
-    private auth: AuthService
+    private userService: UserService
   ) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
@@ -27,7 +27,7 @@ export class IsNotAuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin() {
-    return this.auth.checkAuthorization().pipe(map(isAuth => {
+    return this.userService.checkAuthorization().pipe(map(isAuth => {
       if (isAuth) {
         return this.router.parseUrl('/main');
       } else {

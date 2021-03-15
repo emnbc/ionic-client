@@ -27,7 +27,7 @@ export class UserComponent {
   ) { }
 
   ionViewDidEnter() {
-    this.getUsers();
+    this.getUser();
     this.subscription = this.platform.backButton.subscribeWithPriority(20, () => {
       this.router.navigate(['/main/users']);
     });
@@ -38,14 +38,15 @@ export class UserComponent {
     this.subscription.unsubscribe();
   }
 
-  private async getUsers() {
+  private async getUser() {
     const loading = await this.loadingController.create({message: 'Please wait...'});
     await loading.present();
+
     const id = this.route.snapshot.params?.id;
-    this.http.get<User>('users/' + id).subscribe(async user => {
-      this.user = user;
+    this.http.get<User>('users/' + id, {}).then(async res => {
+      this.user = res.data;
       await loading.dismiss();
-    }, async () => {
+    }).catch(async () => {
       await loading.dismiss();
     });
   }

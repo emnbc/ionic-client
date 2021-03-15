@@ -35,13 +35,12 @@ export class SignInPage {
   async login() {
     this.error = null;
     this.loading = true;
-    this.http.post<any>('auth/login', this.authData).subscribe(async res => {
-      if (res.accessToken) {
-        await this.auth.setTokenToStorage(res.accessToken);
+    this.http.post<any>('auth/login', this.authData).then(async res => {
+      if (res.data) {
+        await this.auth.setTokenToStorage(res.data.accessToken);
         this.router.navigate(['/main']);
       }
-      // this.loading = false;
-    }, error => {
+    }).catch(error => {
       this.error = error.error;
       this.loading = false;
     });

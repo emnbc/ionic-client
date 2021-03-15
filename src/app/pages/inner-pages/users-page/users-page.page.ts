@@ -14,6 +14,12 @@ export class UsersPagePage implements OnInit {
   apiUploads = API_URL + '/uploads/';
   firstLoading: boolean = false;
 
+  pagination = {
+    currentPage: 1,
+    totalCount: 1,
+    size: 10
+  }
+
   constructor(private http: HttpHelperService) { }
 
   ngOnInit() {
@@ -22,14 +28,40 @@ export class UsersPagePage implements OnInit {
   }
 
   getUsers(event?: any) {
-    this.http.get<User[]>('users').subscribe(users => {
-      this.users = users;
-      this.firstLoading = false;
+    const params = {
+      page: '1',
+      size: '20'
+    };
+    this.pagination.currentPage = 2;
+
+    this.http.get<User[]>('users', params).then(res => {
+      this.users = res.data;
+      setTimeout(() => { // fake time out =)
+        this.firstLoading = false;
+      }, 500);
       event?.target?.complete();
-    }, () => {
+    }).catch(() => {
       this.firstLoading = false;
       event?.target?.complete();
     });
+
+  }
+
+  loadUsers(event?: any) {
+    const params = {
+      page: (this.pagination.currentPage + 1).toString(),
+      size: this.pagination.size.toString()
+    };
+
+    this.http.get<User[]>('users', params).then(res => {
+      this.users = [...this.users, ...res.data];
+      this.pagination.currentPage++;
+
+      event?.target?.complete();
+    }).catch(() => {
+      event?.target?.complete();
+    });
+
   }
 
 }
