@@ -7,22 +7,6 @@
     <ion-refresher-content loa></ion-refresher-content>
   </ion-refresher>
 
-
-  <!-- <ion-list>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="assets/img/no-avatar.png">
-      </ion-avatar>
-      <ion-label>
-        <h2>John Dragovich</h2>
-        <p>demo@demo.com</p>
-      </ion-label>
-      <ion-note slot="end">Nov 26, 1982</ion-note>
-    </ion-item>
-
-  </ion-list> -->
-
   <ion-list *ngIf="!firstLoading">
 
     <ion-item *ngFor="let user of users" routerDirection="forward" [routerLink]="['/main/users', user.id]">
@@ -40,7 +24,7 @@
 
   <ion-list *ngIf="firstLoading">
 
-    <ion-item *ngFor="let i of [].constructor(7)">
+    <ion-item *ngFor="let i of [].constructor(10)">
       <ion-avatar slot="start">
         <ion-skeleton-text></ion-skeleton-text>
       </ion-avatar>
@@ -54,7 +38,7 @@
   </ion-list>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadUsers($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content [style]="isTotalComplete ? 'min-height: 10px' : ''"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
 </ion-content>

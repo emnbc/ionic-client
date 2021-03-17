@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpHelperService, API_URL } from '../../../services/http-helper.service';
 import { User } from '../../../models/user.model';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class UsersPagePage implements OnInit {
 
     this.http.get<User[]>('users', params).then(res => {
       this.users = res.data;
+      this.pagination.totalCount = +res.headers['x-total-count'];
       setTimeout(() => { // fake time out =)
         this.firstLoading = false;
       }, 500);
@@ -47,7 +49,7 @@ export class UsersPagePage implements OnInit {
 
   }
 
-  loadUsers(event?: any) {
+  loadUsers(event: any) {
     const params = {
       page: (this.pagination.currentPage + 1).toString(),
       size: this.pagination.size.toString()
@@ -56,12 +58,17 @@ export class UsersPagePage implements OnInit {
     this.http.get<User[]>('users', params).then(res => {
       this.users = [...this.users, ...res.data];
       this.pagination.currentPage++;
+      this.pagination.totalCount = +res.headers['x-total-count'];
 
-      event?.target?.complete();
+      event.target.complete();
     }).catch(() => {
-      event?.target?.complete();
+      event.target.complete();
     });
 
+  }
+
+  get isTotalComplete() {
+    return this.pagination.totalCount <= (this.pagination.currentPage*this.pagination.size);
   }
 
 }
